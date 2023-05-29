@@ -8,7 +8,7 @@ const Form = () => {
     register,
     handleSubmit,
     trigger,
-    formState: { errors },
+    formState: { errors, isValid },
   } = useForm<UserFormWithAddress>({
     resolver: zodResolver(UserFormSchemaWithAddress),
   });
@@ -17,6 +17,8 @@ const Form = () => {
     console.log(data.name);
     console.log(data);
   };
+
+  console.log(isValid); // use to check if form is valid and enable/disable submit button
 
   return (
     <>
