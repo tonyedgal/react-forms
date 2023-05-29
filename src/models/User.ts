@@ -64,13 +64,18 @@ const HasIDSchema = z.object({
   id: z.number().int().positive(),
 });
 
-export const UserSchemaWithAddress = BasicUserSchema.extend({
+export const UserFormSchemaWithAddress = BasicUserSchema.extend({
   address: UserAddressSchema,
-}).merge(HasIDSchema);
+});
+
+export const UserSchemaWithAddress =
+  UserFormSchemaWithAddress.merge(HasIDSchema);
 
 export const UserSchemaWithGeo = BasicUserSchema.extend({
   address: UserAddressSchemaWithGeo,
 }).merge(HasIDSchema);
+
+export type UserFormWithAddress = z.infer<typeof UserFormSchemaWithAddress>;
 
 export type UserWithAddress = z.infer<typeof UserSchemaWithAddress>;
 
