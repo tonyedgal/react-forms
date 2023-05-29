@@ -1,7 +1,7 @@
-import { UserSchemaWithAddress } from "../models/User";
+import { UserSchemaWithGeo } from "../models/User";
 import { z } from "zod";
 
-const UserResults = z.array(UserSchemaWithAddress);
+const UserResults = z.array(UserSchemaWithGeo);
 
 type UserArray = z.infer<typeof UserResults>;
 
