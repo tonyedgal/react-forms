@@ -1,21 +1,23 @@
-import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { DevTool } from "@hookform/devtools";
 
-let renderCount = 0;
+type FormValues = {
+  username: string;
+  email: string;
+  channel: string;
+};
 
 const YoutubeForm = () => {
-  const form = useForm();
-  const { register, control } = form;
+  const form = useForm<FormValues>();
+  const { register, control, handleSubmit } = form;
 
-  const [render, setRender] = useState("");
-
-  renderCount++;
+  const onSubmit = (data: FormValues) => {
+    console.log("form submitted: ", data);
+  };
 
   return (
     <div>
-      <h1>Form ({renderCount / 2})</h1>
-      <form>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <label htmlFor="username">Username</label>
         <input type="text" id="username" {...register("username")} />
 
@@ -24,15 +26,6 @@ const YoutubeForm = () => {
 
         <label htmlFor="channel">Channel</label>
         <input type="text" id="channel" {...register("channel")} />
-
-        <label htmlFor="render">Render</label>
-        <input
-          type="text"
-          id="render"
-          name="render"
-          value={render}
-          onChange={(e) => setRender(e.target.value)}
-        />
 
         <button>Submit</button>
       </form>
