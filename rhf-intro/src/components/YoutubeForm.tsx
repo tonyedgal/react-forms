@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useForm, useFieldArray } from "react-hook-form";
 import { DevTool } from "@hookform/devtools";
 
@@ -49,17 +50,25 @@ const YoutubeForm = () => {
 
   renderCount++;
 
+  useEffect(() => {
+    const subscription = watch((value) => {
+      console.log(value);
+    });
+
+    return () => subscription.unsubscribe();
+  }, [watch]);
+
   // watch specific field
-  const watchUsername = watch("username");
+  // const watchUsername = watch("username");
 
   // watch all fields
-  const watchAllFields = watch();
+  // const watchAllFields = watch();
 
   return (
     <div>
       <h1>Form ({renderCount / 2})</h1>
-      <p>{watchUsername}</p>
-      <p>{JSON.stringify(watchAllFields)}</p>
+      {/* <p>{watchUsername}</p> */}
+      {/* <p>{JSON.stringify(watchAllFields)}</p> */}
 
       <form onSubmit={handleSubmit(onSubmit)} noValidate>
         <div className="form-control">
