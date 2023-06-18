@@ -17,6 +17,8 @@ type FormValues = {
   dob: Date;
 };
 
+let renderCount = 0;
+
 const YoutubeForm = () => {
   const form = useForm<FormValues>({
     defaultValues: {
@@ -33,7 +35,7 @@ const YoutubeForm = () => {
       dob: new Date(),
     },
   });
-  const { register, control, handleSubmit, formState } = form;
+  const { register, control, handleSubmit, formState, watch } = form;
   const { errors } = formState;
 
   const { fields, append, remove } = useFieldArray({
@@ -45,8 +47,20 @@ const YoutubeForm = () => {
     console.log("form submitted: ", data);
   };
 
+  renderCount++;
+
+  // watch specific field
+  const watchUsername = watch("username");
+
+  // watch all fields
+  const watchAllFields = watch();
+
   return (
     <div>
+      <h1>Form ({renderCount / 2})</h1>
+      <p>{watchUsername}</p>
+      <p>{JSON.stringify(watchAllFields)}</p>
+
       <form onSubmit={handleSubmit(onSubmit)} noValidate>
         <div className="form-control">
           <label htmlFor="username">Username</label>
