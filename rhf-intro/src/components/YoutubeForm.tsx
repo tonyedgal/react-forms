@@ -74,7 +74,13 @@ const YoutubeForm = () => {
   };
 
   const handleSetValues = () => {
-    setValue("username", "");
+    // calling setValue does not affect field states
+    // like dirty, touched, or validation.
+    setValue("username", "", {
+      shouldValidate: true,
+      shouldDirty: true,
+      shouldTouch: true,
+    });
   };
 
   // watch specific field
