@@ -36,7 +36,15 @@ const YoutubeForm = () => {
       dob: new Date(),
     },
   });
-  const { register, control, handleSubmit, formState, watch, getValues } = form;
+  const {
+    register,
+    control,
+    handleSubmit,
+    formState,
+    watch,
+    getValues,
+    setValue,
+  } = form;
   const { errors } = formState;
 
   const { fields, append, remove } = useFieldArray({
@@ -63,6 +71,10 @@ const YoutubeForm = () => {
     // otherwise it will return the entire form data.
     // Pass an array of field names to getValues to retrieve the values of those fields.
     console.log("Get Values", getValues());
+  };
+
+  const handleSetValues = () => {
+    setValue("username", "");
   };
 
   // watch specific field
@@ -220,6 +232,9 @@ const YoutubeForm = () => {
         <button>Submit</button>
         <button type="button" onClick={handleGetValues}>
           Get Values
+        </button>
+        <button type="button" onClick={handleSetValues}>
+          Set Values
         </button>
       </form>
       <DevTool control={control} />
